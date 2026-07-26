@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yo</title>
+        /* Original code by User:Chaotic Enby ; converted to frontend by me :3 */
+    <style>
+        body {
+            margin: 0;
+            background-color: #00172D; /* Matches the top of your gradient */
+            font-family: 'Reem Kufi', 'Josefin Sans', 'Roboto', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            overflow:hidden;
+        }
+        
+        html, body {
+    height: 100%;
+    margin: 0;
+}
+        .ce-container {
+            width: 100%; height:100%; 
+            position: relative; 
+            align-content: center;	
+            background: linear-gradient(to bottom, #00172D 0%, #00264D 50%, #02386E 100%);	
+            perspective: 190px;
+            outline: 2px solid white;  
+            outline-offset: -30px;
+        }
+
+        .ce-warning {	
+            width: 100%; 
+            height: 100%; 
+            position: absolute; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;		
+            font-size: 60px; 
+            background-color: #0d0214; 
+            color: #a02c89;	
+            animation: 1s ease-in-out 2.5s forwards fadeaway;
+        }
+
+        .ce-context, .ce-ring, .ce-ring-inner {	
+            width: 450px; 
+            height: 450px; 
+            position: absolute; 
+            left: 0px;		
+            transform-style: preserve-3d;
+        }
+
+        .ce-context {	
+            position: absolute; 
+            left: 50%; 
+            top: 50%; 
+            transform: translate(-50%, -50%);
+            z-index: -1;		
+            /* Note: removed the unassigned animation rule here */
+        }
+
+        .ce-square-container {	
+            width: 450px; 
+            height: 450px; 
+            position: absolute;		
+            transform-style: preserve-3d;
+        }
+
+        .ce-square {	
+            width: 40px; 
+            height: 30px; 
+            position: absolute; 
+            top: 0; 
+            left: 210px;		
+            text-align: center; 
+            font-size: 20px; 
+            transform: rotateX(90deg) rotateY(180deg); 
+            transform-style: preserve-3d;
+        }
+
+        .ce-or { background-color: #d0ac81; color: #0d0214; }
+        .ce-argent { background-color: #beccd9; color: #a02c89; }
+        .ce-purpure { background-color: #3c669d; color: #fdf6f2; }
+        .ce-sable { background-color: #69637c; color: #ffe580; }
+
+        @keyframes fadeaway {  
+            from { opacity: 1; }  
+            to { opacity: 0; }
+        }
+
+        @keyframes rotate-positive {  
+            from { transform: rotateY(0deg) rotateZ(0deg); }  
+            to { transform: rotateY(360deg) rotateZ(360deg); }
+        }
+
+        @keyframes rotate-negative {  
+            from { transform: rotateY(0deg) rotateZ(0deg); }  
+            to { transform: rotateY(-360deg) rotateZ(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ce-container">
+        <div style="color:white; font-size: 30px; font-family: serif; text-align:center">
+            <div><b>Through harmony, obtain order.</b></div>
+     
+        <div style="color:white; font-size: 15px;"> EN/FR/VI = OK<br><br>Discord: etrmc<br>Mail: thwob@proton.me<br>The W Site: Use whois in the Discord server
+        </div>
+        
+        <div class="ce-context" id="ce-rings-container"></div>
+    </div>
+    
+</body>
+
+    <script>
+        const ringConfigurations = [
+            { id: 4, duration: 40 },
+            { id: 3, duration: 40 },
+            { id: 2, duration: 40 },
+            { id: 1, duration: 40 },
+            { id: 0, duration: 20 },
+            { id: -1, duration: 40 },
+            { id: -2, duration: 40 },
+            { id: -3, duration: 40 },
+            { id: -4, duration: 40 }
+        ];
+
+        let squaresHtml = '';
+        for (let i = 0; i <= 32; i += 4) {
+            squaresHtml += `
+                <div class="ce-square-container" style="transform: rotate(${10 * i}deg);"><div class="ce-square ce-or"></div></div>
+                <div class="ce-square-container" style="transform: rotate(${10 * i + 10}deg);"><div class="ce-square ce-sable"></div></div>
+                <div class="ce-square-container" style="transform: rotate(${10 * i + 20}deg);"><div class="ce-square ce-purpure"></div></div>
+                <div class="ce-square-container" style="transform: rotate(${10 * i + 30}deg);"><div class="ce-square ce-argent"></div></div>
+            `;
+        }
+
+        let q = '';
+        ringConfigurations.forEach(ring => {
+            let translateZ = -34 * ring.id;
+            let rotateDeg = 10 * ring.id;
+            
+            let isOdd = Math.abs(ring.id % 2) === 1; 
+            let rotationDirection = isOdd ? '-positive' : '-negative';
+
+            q += `
+                <div class="ce-ring" style="transform: translateZ(${translateZ}px) rotate(${rotateDeg}deg);">
+                    <div class="ce-ring-inner" style="animation: ${ring.duration}s linear 0s infinite rotate${rotationDirection};">
+                        ${squaresHtml}
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById('ce-rings-container').innerHTML = q;
+    </script>
+</html>
