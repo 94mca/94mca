@@ -51,7 +51,7 @@
 
         .ce-context {	
             position: absolute; 
-            left: 50%; 
+            left: 33.33%; 
             top: 50%; 
             transform: translate(-50%, -50%);
             z-index: -1;		
@@ -66,8 +66,8 @@
         }
 
         .ce-square {	
-            width: 40px; 
-            height: 30px; 
+            width: 35px; 
+            height: 20px; 
             position: absolute; 
             top: 0; 
             left: 210px;		
@@ -77,10 +77,26 @@
             transform-style: preserve-3d;
         }
 
-        .ce-or { background-color: #d0ac81; color: #0d0214; }
-        .ce-argent { background-color: #beccd9; color: #a02c89; }
-        .ce-purpure { background-color: #3c669d; color: #fdf6f2; }
-        .ce-sable { background-color: #69637c; color: #ffe580; }
+.ce-or { 
+    background-color: #d0ac81; 
+    color: #0d0214; 
+    box-shadow: 0 0 12px 2px rgba(208, 172, 129, 0.8); 
+}
+.ce-argent { 
+    background-color: #beccd9; 
+    color: #a02c89; 
+    box-shadow: 0 0 12px 2px rgba(190, 204, 217, 0.8); 
+}
+.ce-purpure { 
+    background-color: #3c669d; 
+    color: #fdf6f2; 
+    box-shadow: 0 0 12px 2px rgba(60, 102, 157, 0.8); 
+}
+.ce-sable { 
+    background-color: #69637c; 
+    color: #ffe580; 
+    box-shadow: 0 0 12px 2px rgba(105, 99, 124, 0.8); 
+}
 
         @keyframes fadeaway {  
             from { opacity: 1; }  
@@ -101,28 +117,30 @@
 <body>
 
     <div class="ce-container">
-        <div style="color:white; font-size: 30px; font-family: serif; text-align:center">
+        <div style="color:white; font-size: 30px; font-family: serif; text-align:right; padding:60px">
             <div><b>Through harmony, obtain order.</b></div>
      
-        <div style="color:white; font-size: 15px;"> EN/FR/VI = OK<br><br>Discord: etrmc<br>Mail: thwob@proton.me<br>The W Site: Use whois in the Discord server
+        <div style="color:white; font-size: 15px;">From Sunday, probably.<br>EN/FR/VI = OK<br><br>Discord: etrmc<br>Mail: thwob@proton.me<br>WP: Use whois in the Discord server
         </div>
         
         <div class="ce-context" id="ce-rings-container"></div>
-    </div>
+    </div></div>
     
 </body>
 
     <script>
         const ringConfigurations = [
-            { id: 4, duration: 40 },
-            { id: 3, duration: 40 },
-            { id: 2, duration: 40 },
-            { id: 1, duration: 40 },
-            { id: 0, duration: 20 },
-            { id: -1, duration: 40 },
-            { id: -2, duration: 40 },
-            { id: -3, duration: 40 },
-            { id: -4, duration: 40 }
+            { id: 5, duration: 10},
+            { id: 4, duration: 20},
+            { id: 3, duration: 30},
+            { id: 2, duration: 40},
+            { id: 1, duration: 50},
+            { id: 0, duration: 60},
+            { id: -1, duration: 50},
+            { id: -2, duration: 40},
+            { id: -3, duration: 30},
+            { id: -4, duration: 20},
+            { id: -5, duration: 10},
         ];
 
         let squaresHtml = '';
@@ -138,7 +156,7 @@
         let q = '';
         ringConfigurations.forEach(ring => {
             let translateZ = -34 * ring.id;
-            let rotateDeg = 10 * ring.id;
+            let rotateDeg = ( 15 * ring.id);
             
             let isOdd = Math.abs(ring.id % 2) === 1; 
             let rotationDirection = isOdd ? '-positive' : '-negative';
